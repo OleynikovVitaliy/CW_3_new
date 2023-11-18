@@ -8,6 +8,9 @@ executed_state = 'EXECUTED'
 
 
 def get_payment_type(payment: str):
+    """
+    функция которая маскирует номер карты и номер счета в соответствие с заданием
+    """
     if 'счет' in payment.lower():
         return f'{payment[:5]}**{payment[-4:]}'
     else:
@@ -19,6 +22,10 @@ def get_payment_type(payment: str):
 
 
 def parse(operations):
+    """
+    Основная функция, которая выделяет только выполненные операции,
+    берет последние 5, переводит дату в необходимый формат и выводит все на экран
+    """
     count = 0
     for i in operations:
         if count == 5:
@@ -39,6 +46,10 @@ def parse(operations):
 
 
 try:
+    """
+    Производится открытие файла Json, перевод данных в питоновский формат
+    и производится сортировка строк по дате
+    """
     operations = list()
     with open(file, 'r', encoding="utf-8") as fd:
         operations = json.load(fd)
